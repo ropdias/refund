@@ -1,7 +1,14 @@
 // Getting form elements:
+const form = document.querySelector('form') as HTMLFormElement;
 const amount = document.getElementById('amount') as HTMLInputElement;
+const expense = document.getElementById('expense') as HTMLInputElement;
+const category = document.getElementById('category') as HTMLSelectElement;
 
-if (amount) {
+if (form && amount && expense && category) {
+  form.onsubmit = (event) => {
+    event.preventDefault();
+  };
+
   amount.oninput = () => {
     // Get input value and remove non-numeric characters
     let value = amount.value.replace(/\D/g, '');
@@ -12,7 +19,7 @@ if (amount) {
     amount.value = formatCurrencyBRL(valueWithCents);
   };
 } else {
-  console.error('Um ou mais elementos não foram encontrados.');
+  console.error('One or more elements were not found!');
 }
 
 function formatCurrencyBRL(value: number): string {
