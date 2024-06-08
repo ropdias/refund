@@ -1,0 +1,18 @@
+{
+  "name": "convert",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsup src/scripts.ts --out-dir dist && npm run copy-assets",
+    "copy-assets": "npx cpy src/*.html src/*.css dist && npx cpy src/img/* dist/img"
+  },
+  "keywords": [],
+  "author": "Rodrigo P. Dias",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@swc/core": "^1.5.25",
+    "cpy-cli": "^5.0.0",
+    "tsup": "^8.1.0",
+    "typescript": "^5.4.5"
+  }
+}
