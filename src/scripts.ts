@@ -4,11 +4,28 @@ const amount = document.getElementById('amount') as HTMLInputElement;
 const expense = document.getElementById('expense') as HTMLInputElement;
 const category = document.getElementById('category') as HTMLSelectElement;
 
+interface Expense {
+  id: number;
+  expense: string;
+  category_id: string;
+  category_name: string;
+  amount: string;
+  created_at: Date;
+}
+
+function expenseAdd(newExpense: Expense) {
+  try {
+  } catch (error) {
+    alert('Não foi possível atualizar a lista de despesas.');
+    console.log(error);
+  }
+}
+
 if (form && amount && expense && category) {
   form.onsubmit = (event) => {
     event.preventDefault();
 
-    const newExpense = {
+    const newExpense: Expense = {
       id: new Date().getTime(),
       expense: expense.value,
       category_id: category.value,
@@ -17,7 +34,7 @@ if (form && amount && expense && category) {
       created_at: new Date(),
     };
 
-    console.log(newExpense);
+    expenseAdd(newExpense);
   };
 
   amount.oninput = () => {
