@@ -3,6 +3,7 @@ const form = document.querySelector('form') as HTMLFormElement;
 const amount = document.getElementById('amount') as HTMLInputElement;
 const expense = document.getElementById('expense') as HTMLInputElement;
 const category = document.getElementById('category') as HTMLSelectElement;
+const expenseList = document.querySelector('ul') as HTMLUListElement;
 
 interface Expense {
   id: number;
@@ -30,8 +31,20 @@ function expenseAdd(newExpense: Expense) {
     //   <img src="./img/remove.svg" alt="remover" class="remove-icon" />
     // </li>;
 
+    // Creating the item (li) to add in the list (ul)
     const expenseItem = document.createElement('li');
     expenseItem.classList.add('expense');
+
+    // Creating category icon
+    const expenseIcon = document.createElement('img');
+    expenseIcon.setAttribute('src', `img/${newExpense.category_id}.svg`);
+    expenseIcon.setAttribute('alt', newExpense.category_name);
+
+    // Adding item information
+    expenseItem.append(expenseIcon);
+
+    // Adding the item in the list
+    expenseList && expenseList.append(expenseItem);
   } catch (error) {
     alert('Não foi possível atualizar a lista de despesas.');
     console.log(error);
