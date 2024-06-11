@@ -7,6 +7,9 @@ const expenseList = document.querySelector('ul') as HTMLUListElement;
 const expenseQuantity = document.querySelector(
   'aside header p span'
 ) as HTMLSpanElement;
+const expensesTotal = document.querySelector(
+  'aside header h2'
+) as HTMLHeadingElement;
 
 interface Expense {
   id: number;
@@ -86,9 +89,33 @@ function updateTotals() {
 
     for (let item = 0; item < items.length; item++) {
       const itemAmount = items[item].querySelector('.expense-amount');
+      let valueString = '0';
+      let value = 0;
 
-      console.log(itemAmount);
+      if (itemAmount && itemAmount.textContent) {
+        // Remove non-numeric characters and replaces comma with dot
+        valueString = itemAmount.textContent.replace(/[^\d]/g, '');
+
+        console.log(valueString);
+        // Converts the value to float
+        value = parseFloat(valueString);
+        console.log(value);
+
+        // Checks if it's a valid number
+        if (isNaN(value)) {
+          return alert(
+            'Não foi possível calcular o total. O valor não parece ser um número.'
+          );
+        }
+
+        // Increments the total value
+        total += Number(value);
+        console.log(total);
+      }
     }
+
+    // Adding expense total
+    expensesTotal.textContent = String(total);
   } catch (error) {
     alert('Não foi possível atualizar os totais.');
     console.log(error);
