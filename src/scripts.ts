@@ -65,6 +65,9 @@ function expenseAdd(newExpense: Expense) {
     // Adding the item in the list
     expenseList && expenseList.append(expenseItem);
 
+    // Clears the form to add a new item
+    formClear();
+
     // Update expense items quantity
     updateTotals();
   } catch (error) {
@@ -185,3 +188,15 @@ expenseList &&
       updateTotals();
     }
   });
+
+// Clears the form inputs
+function formClear() {
+  if (expense && category && amount) {
+    expense.value = '';
+    category.value = '';
+    amount.value = '';
+
+    // Sets focus to the amount input
+    expense.focus();
+  }
+}
