@@ -15,6 +15,23 @@ interface Expense {
 
 function expenseAdd(newExpense: Expense) {
   try {
+    // <li class="expense">
+    //   <img src="./img/food.svg" alt="Ícone de tipo da despesa" />
+
+    //   <div class="expense-info">
+    //     <strong>Almoço</strong>
+    //     <span>Alimentação</span>
+    //   </div>
+
+    //   <span class="expense-amount">
+    //     <small>R$</small>1.420,57
+    //   </span>
+
+    //   <img src="./img/remove.svg" alt="remover" class="remove-icon" />
+    // </li>;
+
+    const expenseItem = document.createElement('li');
+    expenseItem.classList.add('expense');
   } catch (error) {
     alert('Não foi possível atualizar a lista de despesas.');
     console.log(error);
