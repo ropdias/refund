@@ -175,6 +175,13 @@ expenseList &&
       event.target instanceof Element &&
       event.target.classList.contains('remove-icon')
     ) {
-      console.log(event);
+      // Gets the parent li of the clicked element
+      const item = event.target.closest('.expense');
+
+      // Removes the item from the list
+      item?.remove();
+
+      // Updates the totals
+      updateTotals();
     }
   });
