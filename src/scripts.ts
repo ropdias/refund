@@ -81,7 +81,7 @@ function updateTotals() {
     // Atualiza a quantidade de itens da lista
     expenseQuantity &&
       (expenseQuantity.textContent = `${items.length} ${
-        items.length > 1 ? 'despesas' : 'despesa'
+        items.length > 1 || items.length === 0 ? 'despesas' : 'despesa'
       }`);
 
     let totalInCents = 0; // Initializes the total in cents to zero
