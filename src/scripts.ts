@@ -4,6 +4,9 @@ const amount = document.getElementById('amount') as HTMLInputElement;
 const expense = document.getElementById('expense') as HTMLInputElement;
 const category = document.getElementById('category') as HTMLSelectElement;
 const expenseList = document.querySelector('ul') as HTMLUListElement;
+const expenseQuantity = document.querySelector(
+  'aside header p span'
+) as HTMLSpanElement;
 
 interface Expense {
   id: number;
@@ -16,21 +19,6 @@ interface Expense {
 
 function expenseAdd(newExpense: Expense) {
   try {
-    // <li class="expense">
-    //   <img src="./img/food.svg" alt="Ícone de tipo da despesa" />
-
-    //   <div class="expense-info">
-    //     <strong>Almoço</strong>
-    //     <span>Alimentação</span>
-    //   </div>
-
-    //   <span class="expense-amount">
-    //     <small>R$</small>1.420,57
-    //   </span>
-
-    //   <img src="./img/remove.svg" alt="remover" class="remove-icon" />
-    // </li>;
-
     // Creating the item (li) to add in the list (ul)
     const expenseItem = document.createElement('li');
     expenseItem.classList.add('expense');
@@ -73,8 +61,28 @@ function expenseAdd(newExpense: Expense) {
 
     // Adding the item in the list
     expenseList && expenseList.append(expenseItem);
+
+    // Update expense items quantity
+    updateTotals();
   } catch (error) {
     alert('Não foi possível atualizar a lista de despesas.');
+    console.log(error);
+  }
+}
+
+function updateTotals() {
+  try {
+    // Recupera todos os itens (li) da lista (ul)
+    const items = expenseList.children;
+
+    // Atualiza a quantidade de itens da lista
+
+    expenseQuantity &&
+      (expenseQuantity.textContent = `${items.length} ${
+        items.length > 1 ? 'despesas' : 'despesa'
+      }`);
+  } catch (error) {
+    alert('Não foi possível atualizar os totais.');
     console.log(error);
   }
 }
