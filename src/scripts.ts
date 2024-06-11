@@ -84,12 +84,12 @@ function updateTotals() {
         items.length > 1 ? 'despesas' : 'despesa'
       }`);
 
-    let total = 0;
+    let totalInCents = 0; // Initializes the total in cents to zero
 
     for (let item = 0; item < items.length; item++) {
       const itemAmount = items[item].querySelector('.expense-amount');
       let valueString = '0';
-      let value = 0;
+      let valueInCents = 0;
 
       if (itemAmount && itemAmount.textContent) {
         // Remove non-numeric characters and replaces comma with dot
@@ -97,20 +97,23 @@ function updateTotals() {
           .replace(/[^\d,]/g, '')
           .replace(',', '.');
 
-        // Converts the value to float
-        value = parseFloat(valueString);
+        // Converts the value to cents (integer)
+        valueInCents = Math.round(parseFloat(valueString) * 100); // Rounds to avoid precision issues
 
         // Checks if it's a valid number
-        if (isNaN(value)) {
+        if (isNaN(valueInCents)) {
           return alert(
             'Não foi possível calcular o total. O valor não parece ser um número.'
           );
         }
 
-        // Increments the total value
-        total += Number(value);
+        // Increments the total in cents
+        totalInCents += valueInCents;
       }
     }
+
+    // Converts the total from cents for display
+    const total = totalInCents / 100;
 
     // Adding expense total
     // Creates the span to add the formatted R$
@@ -163,3 +166,15 @@ function formatCurrencyBRL(value: number): string {
     currency: 'BRL',
   });
 }
+
+// Event that captures the click on the list items
+expenseList &&
+  expenseList.addEventListener('click', function (event) {
+    // Check if the clicked element is the remove icon
+    if (
+      event.target instanceof Element &&
+      event.target.classList.contains('remove-icon')
+    ) {
+      console.log(event);
+    }
+  });
