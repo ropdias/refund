@@ -79,7 +79,6 @@ function updateTotals() {
     const items = expenseList.children;
 
     // Atualiza a quantidade de itens da lista
-
     expenseQuantity &&
       (expenseQuantity.textContent = `${items.length} ${
         items.length > 1 ? 'despesas' : 'despesa'
@@ -94,12 +93,12 @@ function updateTotals() {
 
       if (itemAmount && itemAmount.textContent) {
         // Remove non-numeric characters and replaces comma with dot
-        valueString = itemAmount.textContent.replace(/[^\d]/g, '');
+        valueString = itemAmount.textContent
+          .replace(/[^\d,]/g, '')
+          .replace(',', '.');
 
-        console.log(valueString);
         // Converts the value to float
         value = parseFloat(valueString);
-        console.log(value);
 
         // Checks if it's a valid number
         if (isNaN(value)) {
@@ -110,12 +109,19 @@ function updateTotals() {
 
         // Increments the total value
         total += Number(value);
-        console.log(total);
       }
     }
 
     // Adding expense total
-    expensesTotal.textContent = String(total);
+    // Creates the span to add the formatted R$
+    const symbolBRL = document.createElement('small');
+    symbolBRL.textContent = 'R$';
+    // Formats the value and removes the R$ to be displayed by the small with a custom style
+    let totalString = formatCurrencyBRL(total).toUpperCase().replace('R$', '');
+    // Clears the content of the element
+    expensesTotal.innerHTML = '';
+    // Adds the currency symbol and the formatted total value
+    expensesTotal.append(symbolBRL, totalString);
   } catch (error) {
     alert('Não foi possível atualizar os totais.');
     console.log(error);
