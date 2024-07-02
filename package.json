@@ -9,6 +9,9 @@
   "author": "Rodrigo P. Dias",
   "license": "ISC",
   "description": "",
+  "tsup": {
+    "clean": true
+  },
   "devDependencies": {
     "@swc/core": "^1.5.25",
     "cpy-cli": "^5.0.0",
