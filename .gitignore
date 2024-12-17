@@ -1,24 +1,22 @@
-# dependencies
-/node_modules
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# testing
-/coverage
+node_modules
+dist
+dist-ssr
+*.local
 
-# production
-/dist
-
-# env
-.env
-.env.test
-
-# images
-/images
-
-# data
-/data
-
-# db
-/db/*.db
-
-# vscode settings
-/.vscode
+# Editor directories and files
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
